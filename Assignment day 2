@@ -1,0 +1,359 @@
+1.write a c program for finding the largest element
+
+#include <stdio.h>
+void main()
+{
+int Arr[5] = {12, 56, 34, 78, 100};
+int largest = Arr[0]; 
+for (int i = 1; i < 5; i++)                             
+{
+if (Arr[i] > largest)                               
+{
+largest = Arr[i];    
+}                                   
+}
+printf("The largest element in the array is: %d\n", largest);
+}
+
+2.write a program in C finds which are the largest two elements in a given array.
+
+#include <stdio.h>
+void main()
+{
+int arr[100], i, n, firstLargest, secondLargest;
+printf("Enter the number of elements: ");
+scanf("%d", &n);
+printf("Enter the elements of the array: ");
+for(i = 0; i < n; i++) {
+scanf("%d", &arr[i]);
+}
+if(arr[0] > arr[1]) 
+{
+firstLargest = arr[0];
+secondLargest = arr[1];
+}
+else {
+firstLargest = arr[1];
+secondLargest = arr[0];
+}
+for(i = 2; i < n; i++)        
+{
+if(arr[i] > firstLargest) 
+{
+secondLargest = firstLargest;
+firstLargest = arr[i];
+}
+else if(arr[i] > secondLargest)
+{
+secondLargest = arr[i];
+}
+}
+printf("The FIRST LARGEST = %d\n", firstLargest);
+printf("The SECOND LARGEST = %d\n", secondLargest);
+}
+
+3.C Program finds second largest & smallest elements in an Array.
+
+#include <stdio.h>
+void main()
+{
+int arr[100], i, n, firstLargest, secondLargest, firstSmallest, secondSmallest;
+printf("Enter the number of elements: ");
+scanf("%d", &n);
+printf("Enter the elements of the array: ");
+for(i = 0; i < n; i++)
+{
+scanf("%d", &arr[i]);
+}
+if(arr[0] > arr[1]) 
+{
+firstLargest = arr[0];
+secondLargest = arr[1];
+firstSmallest = arr[1];
+secondSmallest = arr[0];
+}
+else {
+firstLargest = arr[1];
+secondLargest = arr[0];
+firstSmallest = arr[0];
+secondSmallest = arr[1];
+}
+for(i = 2; i < n; i++) 
+{
+if(arr[i] > firstLargest)
+{
+secondLargest = firstLargest;
+firstLargest = arr[i];
+}
+else if(arr[i] > secondLargest) 
+{
+secondLargest = arr[i];
+}
+if(arr[i] < firstSmallest) 
+{
+secondSmallest = firstSmallest;
+firstSmallest = arr[i];
+}
+else if(arr[i] < secondSmallest)
+{
+secondSmallest = arr[i];
+}
+}
+printf("The SECOND LARGEST = %d\n", secondLargest);
+printf("The SECOND SMALLEST = %d\n", secondSmallest);    
+}
+
+4.C Program To Find Maximum Difference Between Two Elements in an Array
+
+#include <stdio.h>
+#include <limits.h>
+void main() 
+{
+int array[10], n, i, maxDiff = INT_MIN, minVal = INT_MAX;
+printf("Enter the number of elements: ");
+scanf("%d", &n);
+printf("Enter the elements of the array: ");
+for(i = 0; i < n; i++)
+{
+scanf("%d", &array[i]);
+}
+for(i = 0; i < n; i++) 
+{
+if(array[i] < minVal) 
+{
+minVal = array[i];
+}
+if(array[i] - minVal > maxDiff) 
+{
+maxDiff = array[i] - minVal;
+}
+}
+printf("Maximum difference is %d\n", maxDiff);
+}
+
+5.C program to remove duplicate elements in an Array?
+
+#include <stdio.h>
+int main() 
+{
+int arr[100], n, i, j, k, duplicate;
+printf("Enter the number of elements: ");
+scanf("%d", &n);
+printf("Enter the elements of the array: ");
+for(i = 0; i < n; i++)
+{
+scanf("%d", &arr[i]);
+}
+for(i = 0; i < n; i++)
+{
+duplicate = 0;
+for(j = i+1; j < n; j++) 
+{
+if(arr[i] == arr[j]) 
+{
+duplicate = 1;
+for(k = j; k < n; k++)
+{
+arr[k] = arr[k+1];
+}
+n--;
+j--;
+}
+}
+if(duplicate)
+{
+for(k = i; k < n; k++)
+{
+arr[k] = arr[k+1];
+}
+n--;
+i--;
+}
+}
+printf("Resultant Array after removing duplicates: ");
+for(i = 0; i < n; i++)
+{
+printf("%d ", arr[i]);
+}
+}
+
+6.C Program to put even & odd elements of an array in 2 separate arrays.
+
+#include <stdio.h>
+void main()
+{
+int arr[50], evenArr[50], oddArr[50];
+int n, i, evenCount = 0, oddCount = 0;
+printf("Enter the number of elements in the array: ");
+scanf("%d", &n);
+printf("Enter the elements of the array: ");
+for (i = 0; i < n; i++)
+{
+scanf("%d", &arr[i]);
+if (arr[i] % 2 == 0)
+{
+evenArr[evenCount] = arr[i];
+evenCount++;
+} 
+else {
+oddArr[oddCount] = arr[i];
+oddCount++;
+}
+}
+printf("\nEven elements: ");
+for (i = 0; i < evenCount; i++)
+{
+printf("%d ", evenArr[i]);
+}
+printf("\nOdd elements: ");
+for (i = 0; i < oddCount; i++)
+{
+printf("%d ", oddArr[i]);
+}
+}
+
+7.Reversing an array
+
+#include <stdio.h>
+int main()
+{
+int arr[50], temp;
+int n, i, j;
+printf("Enter the number of elements in the array: ");
+scanf("%d", &n);
+printf("Enter the elements of the array: ");
+for (i = 0; i < n; i++)
+{
+scanf("%d", &arr[i]);
+}
+j = n - 1; // index of the last element in the array
+for (i = 0; i < n / 2; i++) 
+{
+temp = arr[i];
+arr[i] = arr[j];
+arr[j] = temp;
+j--;
+}
+printf("\nReversed array: ");
+for (i = 0; i < n; i++)
+{
+printf("%d ", arr[i]);
+}
+}
+
+
+8.Write a program in C to count the frequency of each element of an array
+
+#include <stdio.h>
+#define MAX_SIZE 100
+void main()
+{
+int arr[MAX_SIZE], freq[MAX_SIZE];
+int size, i, j, count;
+printf("Enter size of array: ");
+scanf("%d", &size);
+printf("Enter elements in array: ");
+for(i=0; i<size; i++)
+{
+scanf("%d", &arr[i]);
+freq[i] = -1;
+}
+for(i=0; i<size; i++)
+{
+count = 1;
+for(j=i+1; j<size; j++)
+{
+if(arr[i] == arr[j])
+{
+count++;
+freq[j] = 0;
+}
+}
+if(freq[i] != 0)
+{
+freq[i] = count;
+}
+}
+printf("\nFrequency of all elements in array: \n");
+for(i=0; i<size; i++)
+{
+if(freq[i] != 0)
+{
+printf("%d occurs %d times\n", arr[i], freq[i]);
+}
+}
+}
+
+9.C Program to sort an array in descending order.
+
+#include <stdio.h>
+void main()
+{
+int n, temp;
+printf("Enter the value of N: ");
+scanf("%d", &n);
+int arr[n];
+printf("Enter the numbers:\n");
+for(int i=0; i<n; i++)
+scanf("%d", &arr[i]);
+for(int i=0; i<n; i++)
+{
+for(int j=i+1; j<n; j++)
+{
+if(arr[i] < arr[j])
+{
+temp = arr[i];
+arr[i] = arr[j];
+arr[j] = temp;
+}
+}
+}
+printf("The numbers arranged in descending order are given below:\n");
+for(int i=0; i<n; i++)
+printf("%d\n", arr[i]);
+}
+
+
+10.find the minimum number of jumps to reach the end of the array starting from index 0. If the end isn’t reachable, return -1.
+
+#include <stdio.h>
+int minJumps(int arr[], int n)
+{
+if (n <= 1)
+{
+return 0;
+}
+if (arr[0] == 0) 
+{
+return -1;
+}
+int maxReach = arr[0];
+int step = arr[0];
+int jump = 1;
+for (int i = 1; i < n; i++)
+{
+if (i == n - 1) 
+{
+return jump;
+}
+maxReach = (maxReach > i + arr[i]) ? maxReach : i + arr[i];
+step--;
+if (step == 0) 
+{
+jump++;
+if (i >= maxReach)
+{
+return -1;
+}
+step = maxReach - i;
+}
+}
+return -1;
+}
+int main() 
+{
+int arr[] = {2, 3, 1, 1, 2, 4, 2, 0, 1, 1};
+int n = sizeof(arr) / sizeof(arr[0]);
+int min_jumps = minJumps(arr, n);
+printf("Minimum number of jumps required to reach the end of the array: %d", min_jumps);
+}
