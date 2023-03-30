@@ -1,0 +1,335 @@
+1.	C Program to Display Prime Numbers Between Intervals Using Function Enter two positive integers: 12,30
+Prime numbers between 12 and 30 are: 13 17 19 23 29
+
+#include <stdio.h>
+int isPrime(int num);
+int main()
+{
+int num1, num2, i, flag;
+printf("harish192210189: ");
+printf("Enter two positive integers: ");
+scanf("%d %d", &num1, &num2);
+printf("Prime numbers between %d and %d are: ", num1, num2);
+for(i=num1+1; i<num2; i++) 
+{
+flag = isPrime(i);
+if(flag == 1)
+{
+printf("%d ", i);
+}
+}
+return 0;
+}
+int isPrime(int num)
+{
+int i;
+if(num < 2)
+{
+return 0;
+}
+for(i=2; i<=num/2; i++) 
+{
+if(num%i == 0)
+{
+return 0;
+}
+}
+    return 1;
+}
+
+2.	C Program to Check Whether a Number can be Expressed as Sum of Two Prime Numbers
+This program takes a positive integer from the user and checks whether that number can be expressed as the sum of two prime numbers.
+If the number can be expressed as the sum of two prime numbers, the output shows the combination of the prime numbers.
+Enter a positive integer: 34
+34 = 3 + 31
+34 = 5 + 29
+34 = 11 + 23
+34 = 17 + 17
+
+#include <stdio.h>
+int isPrime(int num)
+{
+int i;
+for (i = 2; i <= num / 2; i++)
+{
+if (num % i == 0) 
+{
+return 0;
+}
+}
+return 1;
+}
+int main() 
+{
+int num, i, flag = 0;
+printf("harish192210189: ");
+printf("Enter a positive integer: ");
+scanf("%d", &num);
+for (i = 2; i <= num / 2; i++) 
+{
+if (isPrime(i))
+{
+if (isPrime(num - i)) 
+{
+printf("%d = %d + %d\n", num, i, num - i);
+flag = 1;
+}
+}
+}
+if (!flag) 
+{
+printf("%d cannot be expressed as the sum of two prime numbers.\n", num);
+}
+return 0;
+}
+
+3.	C Program to Find GCD of Two Numbers using Recursion
+
+#include <stdio.h>
+int gcd(int num1, int num2) 
+{
+if (num2 == 0) 
+{
+return num1;
+}
+else {
+return gcd(num2, num1 % num2);
+}
+}
+int main() 
+{
+int num1, num2;
+printf("harish192210189: ");
+printf("Enter two positive integers: ");
+scanf("%d %d", &num1, &num2);
+printf("GCD of %d and %d is %d\n", num1, num2, gcd(num1, num2));
+return 0;
+}
+
+4.	C Program to Find LCM of Two Numbers
+
+#include <stdio.h>
+int main()
+{
+int num1, num2, max;
+printf("harish192210189: ");
+printf("Enter two positive integers: ");
+scanf("%d %d", &num1, &num2);
+max = (num1 > num2) ? num1 : num2;
+while (1) 
+{
+if (max % num1 == 0 && max % num2 == 0)
+{
+printf("LCM of %d and %d is %d\n", num1, num2, max);
+break;
+}
+++max;
+}
+return 0;
+}
+
+5.	C Program to Find Highest Frequency Character in a String
+
+#include <stdio.h>
+#include <string.h>
+#define MAX_CHARS 256
+int main()
+{
+char str[100];
+int freq[MAX_CHARS] = {0};
+int i, max, len;
+printf("harish192210189: ");
+printf("Enter a string: ");
+gets(str);
+len = strlen(str);
+for (i = 0; i < len; i++)
+{
+freq[str[i]]++;
+}
+max = 0;
+for (i = 0; i < MAX_CHARS; i++) 
+{
+if (freq[i] > freq[max]) {
+max = i;
+}
+}
+printf("Highest frequency character is '%c' with frequency %d\n", max, freq[max]);
+return 0;
+}
+
+
+6.	Anagram Program in C:
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+char str1[100], str2[100];
+int freq1[26] = {0}, freq2[26] = {0};
+int i, len1, len2, flag = 1;
+printf("harish192210189: ");
+printf("Enter first string: ");
+scanf("%s", str1);
+printf("Enter second string: ");
+scanf("%s", str2);
+len1 = strlen(str1);
+len2 = strlen(str2);
+if (len1 != len2)
+{
+printf("Strings are not anagrams.\n");
+return 0;
+}
+for (i = 0; i < len1; i++)
+{
+freq1[str1[i] - 'a']++;
+}
+for (i = 0; i < len2; i++)
+{
+freq2[str2[i] - 'a']++;
+}
+for (i = 0; i < 26; i++)
+{
+if (freq1[i] != freq2[i])
+{
+flag = 0;
+break;
+}
+}
+if (flag)
+{
+printf("Strings are anagrams.\n");
+}
+else
+{
+printf("Strings are not anagrams.\n");
+}
+return 0;
+}
+
+7.	C Program to Find the Sum of ASCII Value of All Characters in the String
+
+#include <stdio.h>
+int main()
+{
+char str[100];
+int sum = 0, i;
+printf("harish192210189: ");
+printf("Enter the string: ");
+gets(str);
+for(i = 0; str[i] != '\0'; i++) 
+{
+sum += str[i];
+}
+printf("Sum of all characters: %d", sum);
+return 0;
+}
+
+8.	C Program to Print All Permutations of a Given String
+
+#include <stdio.h>
+#include <string.h>
+void swap(char *x, char *y)
+{
+char temp = *x;
+*x = *y;
+*y = temp;
+}
+void permute(char *str, int l, int r)
+{
+if (l == r) 
+{
+printf("%s\n", str);
+} else {
+for (int i = l; i <= r; i++)
+{
+swap((str+l), (str+i));
+permute(str, l+1, r);
+swap((str+l), (str+i));
+}
+}
+}
+int main() 
+{
+char str[100];
+printf("harish192210189: ");
+printf("Enter a string: ");
+scanf("%s", str);
+printf("All possible permutations are:\n");
+int n = strlen(str);
+permute(str, 0, n-1);
+return 0;
+}
+
+9.	Write a C program to copy one array elements to another array using pointers. 
+
+#include <stdio.h>
+#define MAX_SIZE 100
+void copy_array(int *src, int *dest, int size);
+int main() 
+{
+int source_array[MAX_SIZE], target_array[MAX_SIZE];
+int size, i;
+printf("harish192210189: ");
+printf("Enter the number of elements in the array: ");
+scanf("%d", &size);
+printf("Enter the elements of the array: ");
+for(i = 0; i < size; i++)
+{
+scanf("%d", &source_array[i]);
+}
+copy_array(source_array, target_array, size);
+printf("Elements of source array: ");
+for(i = 0; i < size; i++) 
+{
+printf("%d ", source_array[i]);
+}
+printf("\nElements of target array: ");
+for(i = 0; i < size; i++) 
+{
+printf("%d ", target_array[i]);
+}
+return 0;
+}
+void copy_array(int *src, int *dest, int size)
+{
+int i;
+for(i = 0; i < size; i++)
+{
+*(dest + i) = *(src + i);
+}
+}
+
+10.	Write a C Program to reverse string using pointers and function. 
+Enter any String :: Saveetha
+The Reverse of the String [ Saveetha ] is ::  ahteevaS
+
+#include <stdio.h>
+#include <string.h>
+void reverse_string(char*);
+int main()
+{
+char str[100];
+printf("harish192210189: ");
+printf("Enter any String :: ");
+scanf("%s", str);
+printf("The Reverse of the String [ %s ] is ::  ", str);
+reverse_string(str);
+printf("%s\n", str);
+return 0;
+}
+void reverse_string(char *str)
+{
+int i, j;
+char temp;
+i = 0;
+j = strlen(str) - 1;
+while (i < j)
+{
+temp = *(str + i);
+*(str + i) = *(str + j);
+*(str + j) = temp;
+i++;
+j--;
+}
+}
+
