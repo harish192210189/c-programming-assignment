@@ -1,0 +1,208 @@
+1.Write a C program to check positive, negative or zero using simple if or if else.
+
+#include <stdio.h>
+void main() 
+{
+int num;
+printf("Input number: ");
+scanf("%d", &num);
+if(num > 0) 
+{
+printf("%d is positive", num);
+}
+else if(num < 0) 
+{
+printf("%d is negative", num);
+}
+else {
+printf("The number is zero");
+}
+}
+
+2.Write a C program to check whether a number is divisible by 5 and 11 or not using if else. How to check divisibility of any number in C programming.
+
+#include <stdio.h>
+void main()
+{
+int num;
+printf("Input number: ");
+scanf("%d", &num);
+if(num % 5 == 0 && num % 11 == 0)
+{
+printf("Number is divisible by 5 and 11");
+}
+else {
+printf("Number is not divisible by 5 and 11");
+}
+}
+
+
+3.Write a C program to input a character from user and check whether the given character is alphabet or not using if else.
+
+#include <stdio.h>
+void main() 
+{
+char ch;
+printf("Input character: ");
+scanf("%c", &ch);
+if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) 
+{
+printf("'%c' is alphabet", ch);
+}
+else {
+printf("'%c' is not alphabet", ch);
+}    
+}
+
+4.Write a C program to count the Vowels in the given string.
+
+#include <stdio.h>
+#include <string.h>
+void main()
+{
+char str[100];
+int vowels = 0;
+printf("Enter a string: ");
+fgets(str, 100, stdin);
+for(int i = 0; i < strlen(str); i++) 
+{
+if(str[i] == 'a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u' || str[i] == 'A' || str[i] == 'E' || str[i] == 'I' || str[i] == 'O' || str[i] == 'U') {
+vowels++;
+}
+}
+    
+    
+5.Write a C program to input character from user and check whether character is uppercase or lowercase alphabet using if else
+
+#include <stdio.h>
+void main() 
+{
+char ch;
+printf("Input character: ");
+scanf("%c", &ch);
+if(ch >= 'a' && ch <= 'z') 
+{
+printf("'%c' is lowercase alphabet", ch);
+}
+else if(ch >= 'A' && ch <= 'Z') 
+{
+printf("'%c' is uppercase alphabet", ch);
+}
+else {
+printf("'%c' is not an alphabet", ch);
+}
+}
+
+
+6. C program to  print minimum number of notes (Rs. 500, 100, 50, 20, 10, 5, 2, 1) required for the amount.
+
+#include <stdio.h>
+void main()
+{
+int amount, notes;
+printf("Input amount: ");
+scanf("%d", &amount);
+
+notes = amount / 500;
+amount = amount % 500;
+printf("500: %d\n", notes);
+
+notes = amount / 100;
+amount = amount % 100;
+printf("100: %d\n", notes);
+
+notes = amount / 50;
+amount = amount % 50;
+printf("50: %d\n", notes);
+
+notes = amount / 20;
+amount = amount % 20;
+printf("20: %d\n", notes);
+
+notes = amount / 10;
+amount = amount % 10;
+printf("10: %d\n", notes);
+
+notes = amount / 5;
+amount = amount % 5;
+printf("5: %d\n", notes);
+
+notes = amount / 2;
+amount = amount % 2;
+printf("2: %d\n", notes);
+
+notes = amount / 1;
+amount = amount % 1;
+printf("1: %d\n", notes);   
+}
+
+
+7.Write a C program to input a number from user and count number of digits in the given integer using loop.
+
+#include <stdio.h>
+void main() 
+{
+int num, count = 0;
+printf("Input num: ");
+scanf("%d", &num);
+while (num != 0)
+{
+count++;
+num = num / 10;
+}
+printf("Number of digits: %d\n", count);
+}
+
+
+8.Write a C program to input a number and calculate sum of digits using for loop
+
+#include <stdio.h>
+void main() 
+{
+int num, sum = 0, digit;
+printf("Input any number: ");
+scanf("%d", &num);
+for (int i = num; i > 0; i = i / 10)
+{
+digit = i % 10;
+sum += digit;
+}
+printf("Sum of digits: %d\n", sum);
+}
+
+9.Write a C program to input a number from user and find reverse of the given number using for loop.
+
+#include <stdio.h>
+void main() 
+{
+int num, reverse = 0;
+printf("Input number: ");
+scanf("%d", &num);
+for (int i = num; i > 0; i = i / 10)
+{
+reverse = reverse * 10 + (i % 10);
+}
+printf("Reverse of %d = %d\n", num, reverse);
+}
+
+
+10.Write a C program to input decimal number from user and convert to binary number system.
+
+
+#include <stdio.h>
+void main() 
+{
+int decimal, binary = 0, base = 1;
+printf("Input decimal number: ");
+scanf("%d", &decimal);
+while (decimal > 0)
+{
+binary += (decimal % 2) * base;
+decimal = decimal / 2;
+base = base * 10;
+}
+printf("Binary number: %d\n", binary);
+}
+
+
+
