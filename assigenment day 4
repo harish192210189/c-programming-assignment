@@ -1,0 +1,453 @@
+1.	Write C program to accept the details of employee and display them using structure. Details consist of Employee ID, Name, Designation, Department, and Salary.
+
+#include <stdio.h>
+#include <string.h>
+struct Employee 
+{
+int id;
+char name[50];
+char designation[50];
+char department[50];
+float salary;
+};
+int main() 
+{
+struct Employee emp; 
+printf("Enter employee ID: ");
+scanf("%d", &emp.id);
+printf("Enter employee name: ");
+scanf(" %[^\n]", emp.name);
+printf("Enter employee designation: ");
+scanf(" %[^\n]", emp.designation);
+printf("Enter employee department: ");
+scanf(" %[^\n]", emp.department);
+printf("Enter employee salary: ");
+scanf("%f", &emp.salary);
+printf("\nEmployee ID: %d\n", emp.id);
+printf("Employee name: %s\n", emp.name);
+printf("Employee designation: %s\n", emp.designation);
+printf("Employee department: %s\n", emp.department);
+printf("Employee salary: %.2f\n", emp.salary);
+return 0;
+}
+
+
+2.	Write C program to accept batting information of cricket team using structure. It contains player name and runs scored by player. Calculate total runs scored by cricket team
+
+
+#include <stdio.h>
+#include <string.h>
+struct Player 
+{
+char name[50];
+int runs_scored;
+};
+int main() 
+{
+struct Player team[MAX_PLAYERS]; 
+int num_players, total_runs = 0;
+printf("Enter number of players in the team (max %d): ", MAX_PLAYERS);
+scanf("%d", &num_players);
+for (int i = 0; i < num_players; i++)
+{
+printf("Enter name of player %d: ", i+1);
+scanf(" %[^\n]", team[i].name);
+printf("Enter runs scored by player %d: ", i+1);
+scanf("%d", &team[i].runs_scored);
+total_runs += team[i].runs_scored;
+}
+printf("\nTotal runs scored by the team: %d\n", total_runs);
+return 0;
+}
+
+
+3.	C program to read information of student. It contains Name, Roll number, Birthday, admission date. Calculate age of student at the time of admission.
+
+
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
+
+struct Student {
+    char name[50];
+    int roll_num;
+    struct tm birth_date;
+    struct tm admission_date;
+};
+
+
+int calculate_age(struct tm birth_date, struct tm ref_date) {
+    int age = ref_date.tm_year - birth_date.tm_year;
+    if (ref_date.tm_mon < birth_date.tm_mon ||
+        (ref_date.tm_mon == birth_date.tm_mon && ref_date.tm_mday < birth_date.tm_mday)) {
+        age--;
+    }
+    return age;
+}
+
+int main() {
+    struct Student student; 
+    
+    printf("Enter student name: ");
+    scanf(" %[^\n]", student.name);
+    printf("Enter student roll number: ");
+    scanf("%d", &student.roll_num);
+    printf("Enter student birth date (YYYY-MM-DD): ");
+    scanf("%d-%d-%d", &student.birth_date.tm_year, &student.birth_date.tm_mon, &student.birth_date.tm_mday);
+    student.birth_date.tm_year -= 1900; 
+    student.birth_date.tm_mon--; 
+    printf("Enter student admission date (YYYY-MM-DD): ");
+    scanf("%d-%d-%d", &student.admission_date.tm_year, &student.admission_date.tm_mon, &student.admission_date.tm_mday);
+    student.admission_date.tm_year -= 1900; 
+    student.admission_date.tm_mon--; 
+    
+    int age = calculate_age(student.birth_date, student.admission_date);
+
+   
+    printf("\nStudent name: %s\n", student.name);
+    printf("Student roll number: %d\n", student.roll_num);
+    printf("Student birth date: %04d-%02d-%02d\n", student.birth_date.tm_year+1900, student.birth_date.tm_mon+1, student.birth_date.tm_mday);
+    printf("Student admission date: %04d-%02d-%02d\n", student.admission_date.tm_year+1900, student.admission_date.tm_mon+1, student.admission_date.tm_mday);
+    printf("Student age at admission: %d\n", age);
+
+    return 0;
+}
+
+
+4.	Write a 'C' program to accept customer details such as: Account_no, Name, Balance using structure. Assume 3 customers in the bank. Write a function to print the account no. and name of each customer whose balance < 100 Rs.
+
+
+#include <stdio.h>
+#include <string.h>
+{
+int account_no;
+char name[50];
+float balance;
+};
+void print_low_balance_customers(struct Customer customers[], int num_customers)
+{
+printf("Customers with balance less than 100 Rs:\n");
+for (int i = 0; i < num_customers; i++) 
+{
+if (customers[i].balance < 100.0) 
+{
+printf("Account number: %d, Name: %s\n", customers[i].account_no, customers[i].name);
+}
+}
+}
+int main() 
+{
+struct Customer customers[3]; 
+for (int i = 0; i < 3; i++) {
+printf("Enter details of customer %d:\n", i+1);
+printf("Account number: ");
+scanf("%d", &customers[i].account_no);
+printf("Name: ");
+scanf(" %[^\n]", customers[i].name);
+printf("Balance: ");
+scanf("%f", &customers[i].balance);
+}
+print_low_balance_customers(customers, 3);
+return 0;
+}
+
+5.	Write a C program to accept details of 'n' employee (eno, ename, salary) and display the details of employee having highest salary. Use array of structure.
+
+
+#include <stdio.h>
+#include <string.h>
+struct Employee 
+{
+int eno;
+char ename[50];
+float salary;
+};
+int main()
+{
+int n;
+printf("Enter the number of employees: ");
+scanf("%d", &n);
+struct Employee employees[n];
+
+for (int i = 0; i < n; i++) 
+{
+printf("Enter details of employee %d:\n", i+1);
+printf("Employee number: ");
+scanf("%d", &employees[i].eno);
+printf("Name: ");
+scanf(" %[^\n]", employees[i].ename);
+printf("Salary: ");
+scanf("%f", &employees[i].salary);
+}
+
+struct Employee highest_salary_employee = employees[0];
+for (int i = 1; i < n; i++) {
+if (employees[i].salary > highest_salary_employee.salary) {
+highest_salary_employee = employees[i];
+}
+}
+
+printf("\nDetails of employee with highest salary:\n");
+printf("Employee number: %d\n", highest_salary_employee.eno);
+printf("Name: %s\n", highest_salary_employee.ename);
+printf("Salary: %f\n", highest_salary_employee.salary);
+return 0;
+}
+
+6.	Write a menu driven program in 'C' which shows the working of library. The menu option should be
+i) Add book details.
+ii) Display book details.
+iii) List all books of given author.
+iv) List the count of books in the library.
+v) Exit.
+
+#include <stdio.h>
+#include <string.h>
+
+struct Book {
+    char title[50];
+    char author[50];
+    int year;
+    int pages;
+};
+
+struct Book library[50];
+int count = 0;
+
+
+void addBook() {
+    printf("\nEnter book details:\n");
+    printf("Title: ");
+    scanf(" %[^\n]", library[count].title);
+    printf("Author: ");
+    scanf(" %[^\n]", library[count].author);
+    printf("Year: ");
+    scanf("%d", &library[count].year);
+    printf("Pages: ");
+    scanf("%d", &library[count].pages);
+    count++;
+}
+
+
+void displayBooks() {
+    printf("\nList of books in the library:\n");
+    for (int i = 0; i < count; i++) {
+        printf("%s by %s (%d, %d pages)\n", library[i].title, library[i].author, library[i].year, library[i].pages);
+    }
+}
+
+
+void searchByAuthor() {
+    char author[50];
+    int found = 0;
+    printf("\nEnter author name: ");
+    scanf(" %[^\n]", author);
+    printf("\nBooks by %s:\n", author);
+    for (int i = 0; i < count; i++) {
+        if (strcmp(author, library[i].author) == 0) {
+            printf("%s (%d, %d pages)\n", library[i].title, library[i].year, library[i].pages);
+            found = 1;
+        }
+    }
+    if (!found) {
+        printf("No books by %s found in the library.\n", author);
+    }
+}
+
+
+void listCount() {
+    printf("\nNumber of books in the library: %d\n", count);
+}
+
+int main() {
+    int choice;
+
+    do {
+        printf("\nMenu:\n");
+        printf("1. Add book details.\n");
+        printf("2. Display book details.\n");
+        printf("3. List all books of given author.\n");
+        printf("4. List the count of books in the library.\n");
+        printf("5. Exit.\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addBook();
+                break;
+            case 2:
+                displayBooks();
+                break;
+            case 3:
+                searchByAuthor();
+                break;
+            case 4:
+                listCount();
+                break;
+            case 5:
+                printf("\nExiting program...\n");
+                break;
+            default:
+                printf("\nInvalid choice. Try again.\n");
+                break;
+        }
+    } while (choice != 5);
+
+    return 0;
+}
+
+7.	Write a 'C' Program to create a structure of student having fields roll_no, stud_name, mark1, mark2, mark3. Calculate total marks and average marks. Arrange the records in descending order of marks
+
+
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    int roll_no;
+    char stud_name[50];
+    int mark1, mark2, mark3;
+    int total_marks;
+    float avg_marks;
+};
+
+void calculateMarks(struct Student *s) {
+    s->total_marks = s->mark1 + s->mark2 + s->mark3;
+    s->avg_marks = s->total_marks / 3.0;
+}
+
+void swap(struct Student *a, struct Student *b) {
+    struct Student temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void sortDescending(struct Student arr[], int n) {
+for (int i = 0; i < n-1; i++) {
+for (int j = 0; j < n-i-1; j++) {
+if (arr[j].total_marks < arr[j+1].total_marks) {
+swap(&arr[j], &arr[j+1]);
+}
+}
+}
+}
+
+int main() {
+    int n;
+    printf("Enter number of students: ");
+ scanf("%d", &n);
+struct Student students[n];
+
+    for (int i = 0; i < n; i++) {
+        printf("\nEnter details for student %d:\n", i+1);
+        printf("Roll number: ");
+        scanf("%d", &students[i].roll_no);
+        printf("Name: ");
+        scanf(" %[^\n]", students[i].stud_name);
+        printf("Marks in 3 subjects: ");
+        scanf("%d %d %d", &students[i].mark1, &students[i].mark2, &students[i].mark3);
+        calculateMarks(&students[i]);
+    }
+
+  sortDescending(students, n)
+   
+    printf("\nStudent details in descending order of marks:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d. %s (Roll no. %d): %d marks (Avg: %.2f)\n", i+1, students[i].stud_name, students[i].roll_no, students[i].total_marks, students[i].avg_marks);
+    }
+
+    return 0;
+}
+
+
+
+8.	Write a program that declares a union variable data that can store an integer or a float value. Prompt the user to enter a value of their choice and store it in the appropriate member of the union. Then, print the value that was entered
+
+
+#include <stdio.h>
+union Data
+{
+int i;
+float f;
+};
+int main() {
+union Data data;
+char choice;
+printf("Enter 'i' for integer or 'f' for float: ");
+scanf(" %c", &choice);
+if (choice == 'i') {
+printf("Enter an integer value: ");
+scanf("%d", &data.i);
+printf("Value entered: %d\n", data.i);
+} else if (choice == 'f') {
+printf("Enter a float value: ");
+scanf("%f", &data.f);
+printf("Value entered: %.2f\n", data.f);
+} else {
+printf("Invalid choice!\n");
+}
+return 0;
+}
+
+9.	Create a program that defines a union student that can store a student's name (up to 50 characters) and their GPA. Prompt the user to enter the student's name and GPA, and store them in the union. Then, print the student's name and GPA.
+
+
+#include <stdio.h>
+union student 
+{
+char name[50];
+float gpa;
+};
+int main() 
+{
+union student s;
+printf("Enter student name: ");
+fgets(s.name, sizeof(s.name), stdin);
+printf("Enter student GPA: ");
+scanf("%f", &s.gpa);
+printf("Student name: %s", s.name);
+printf("Student GPA: %.2f\n", s.gpa);
+return 0;
+}
+
+
+10.	Write a program that defines a union shape that can store a circle's radius or a rectangle's length and width. Prompt the user to enter the type of shape they want to calculate (circle or rectangle), and then prompt them to enter the appropriate dimensions. Calculate and print the area of the shape they entered.
+
+
+#include <stdio.h>
+#define PI 3.14159
+
+union shape 
+{
+float radius;
+struct {
+float length;
+float width;
+} rectangle;
+};
+int main() {
+union shape s;
+char shape_type;
+printf("Enter shape type (c for circle, r for rectangle): ");
+scanf("%c", &shape_type);
+float area;
+if (shape_type == 'c') {
+printf("Enter circle radius: ");
+scanf("%f", &s.radius);
+area = PI * s.radius * s.radius;
+} else if (shape_type == 'r') {
+printf("Enter rectangle length: ");
+scanf("%f", &s.rectangle.length);
+printf("Enter rectangle width: ");
+scanf("%f", &s.rectangle.width);
+area = s.rectangle.length * s.rectangle.width;
+} else {
+printf("Invalid shape type!\n");
+return 1;
+}
+printf("The area of the %s is %.2f\n", (shape_type == 'c') ? "circle" : "rectangle", area);
+return 0;
+}
+
+
